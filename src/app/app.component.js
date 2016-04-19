@@ -1,4 +1,5 @@
 import template from './app.html';
+import './app.css';
 
 class AppComponent {
   constructor() {
