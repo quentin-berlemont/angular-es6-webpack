@@ -36,6 +36,11 @@ const common = {
         include: PATHS.src
       },
       {
+        test: /\.css$/,
+        loaders: ['style-loader', 'css-loader', 'postcss-loader'],
+        include: PATHS.src
+      },
+      {
         test: /\.(jpe?g|png|gif|svg)$/i,
         loaders: [
           'url-loader?limit=25000&name=images/[name].[hash].[ext]',
@@ -62,15 +67,6 @@ const common = {
 if ('start' === TARGET || !TARGET) {
   module.exports = merge(common, {
     devtool: 'eval-source-map',
-    module: {
-      loaders: [
-        {
-          test: /\.css$/,
-          loaders: ['style-loader', 'css-loader', 'postcss-loader'],
-          include: PATHS.src
-        }
-      ]
-    },
     devServer: {
       historyApiFallback: true,
       inline: true,
@@ -84,7 +80,7 @@ if ('start' === TARGET || !TARGET) {
 }
 
 if ('build' === TARGET) {
-  module.exports = merge(common, {
+  module.exports = merge.smart(common, {
     entry: {
       vendor: Object.keys(pkg.dependencies)
     },
@@ -96,7 +92,6 @@ if ('build' === TARGET) {
             'style-loader',
             ['css-loader', 'postcss-loader']
           ),
-          include: PATHS.src
         }
       ]
     },
