@@ -41,11 +41,12 @@
     "webpack": "^1.13.0",
     "webpack-dev-server": "^1.14.1",
     "webpack-hot-middleware": "^2.10.0",
+    "webpack-md5-hash": "0.0.5",
     "webpack-merge": "^0.11.0"
   },
   "scripts": {
-    "start": "webpack-dev-server --progress",
-    "build": "webpack --progress",
+    "start": "webpack-dev-server --config webpack.config.js --progress",
+    "build": "webpack --config webpack.build.config.js --progress",
     "test": "karma start"
   }
 }
