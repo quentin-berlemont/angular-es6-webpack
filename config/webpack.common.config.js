@@ -1,24 +1,19 @@
 const path = require('path');
-const webpack = require('webpack');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const postcssImport = require('postcss-import');
-const postcssUrl = require('postcss-url');
+const postcssImport  = require('postcss-import');
 const postcssCssnext = require('postcss-cssnext');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const PATHS = {
-  src: path.join(__dirname, 'src'),
-  build: path.join(__dirname, 'build')
+  src: path.join(__dirname, '../src'),
+  build: path.join(__dirname, '../build')
 };
 
 module.exports = {
-  debug: true,
-  devtool: 'eval-source-map',
   entry: {
     app: path.join(PATHS.src, 'app')
   },
   output: {
-    path: PATHS.build,
-    filename: '[name].bundle.js'
+    path: PATHS.build
   },
   resolve: {
     extensions: ['', '.js'],
@@ -41,29 +36,26 @@ module.exports = {
       },
       {
         test: /\.(jpe?g|png|gif)$/i,
-        loaders: ['file-loader?images/[name].[ext]']
+        loaders: [
+          'url-loader?limit=25000&name=images/[name].[ext]',
+          'image-webpack?bypassOnDebug'
+        ]
       },
       {
-         test: /\.(woff2?|ttf|eot|svg)$/,
-         loaders: ['file-loader?fonts/[name].[ext]']
+        test: /\.(woff2?|ttf|eot|svg)$/,
+        loaders: [
+          'url-loader?limit=25000&name=fonts/[name].[ext]'
+        ]
       }
     ]
   },
   postcss: function(webpack) {
     return [
       postcssImport({ addDependencyTo: webpack }),
-      postcssUrl(),
       postcssCssnext()
     ];
   },
-  devServer: {
-    historyApiFallback: true,
-    inline: true,
-    hot: true,
-    stats: 'errors-only'
-  },
   plugins: [
-    new webpack.HotModuleReplacementPlugin(),
     new HtmlWebpackPlugin({
       template: path.join(PATHS.src, 'index.html')
     })

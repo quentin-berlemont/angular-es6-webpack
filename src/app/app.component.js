@@ -1,4 +1,4 @@
-import template from './app.html';
+import AppTemplate from './app.html';
 import './app.css';
 
 class AppComponent {
@@ -8,6 +8,7 @@ class AppComponent {
 }
 
 export default {
-  template: template,
-  controller: AppComponent
+  template: AppTemplate,
+  controller: AppComponent,
+  controllerAs: 'app'
 }
