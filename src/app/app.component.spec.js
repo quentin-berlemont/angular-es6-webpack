@@ -1,6 +1,7 @@
 import AppComponent from './app.component';
 import AppTemplate from './app.html';
 
+/** @test {AppComponent} */
 describe('AppComponent', () => {
   it('includes the intended template',() => {
     expect(AppComponent.template).to.equal(AppTemplate);

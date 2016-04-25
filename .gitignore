@@ -1,4 +1,5 @@
 build/
 coverage/
+doc/
 node_modules/
 npm-debug.log

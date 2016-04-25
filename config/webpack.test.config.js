@@ -10,11 +10,9 @@ module.exports = webpackMerge.smart(commonConfig, {
     preLoaders: [
       {
         test: /\.js$/,
-        loader: 'isparta',
+        loaders: ['isparta-loader', 'eslint-loader'],
         include: path.join(__dirname, '../src/app'),
-        exclude: [
-          /\.(e2e|spec)\.js$/,
-        ]
+        exclude: /\.(e2e|spec)\.js$/
       }
     ]
   }
