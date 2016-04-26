@@ -3,12 +3,12 @@ import AppTemplate from './app.html';
 
 /** @test {AppComponent} */
 describe('AppComponent', () => {
-  it('includes the intended template',() => {
+  it('includes the intended template', () => {
     expect(AppComponent.template).to.equal(AppTemplate);
   });
 
   it('invokes the right controller', () => {
-      expect(AppComponent.controller.name).to.be.equal('AppComponent');
+    expect(AppComponent.controller.name).to.be.equal('AppComponent');
   });
 
   it('uses `controllerAs` syntax', () => {
