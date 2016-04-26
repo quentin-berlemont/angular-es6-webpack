@@ -1,11 +1,11 @@
-const path = require('path');
-const webpack = require('webpack');
-const webpackMerge = require('webpack-merge');
-const commonConfig = require('./webpack.common.config.js');
-const pkg = require ('../package.json');
-const CleanWebpackPlugin = require('clean-webpack-plugin');
-const WebpackMd5Hash = require('webpack-md5-hash');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+var pkg = require ('../package.json');
+var webpack = require('webpack');
+var webpackMerge = require('webpack-merge');
+var CleanWebpackPlugin = require('clean-webpack-plugin');
+var Md5HashWebpackPlugin = require('webpack-md5-hash');
+var ExtractTextWebpackPlugin = require('extract-text-webpack-plugin');
+
+var commonConfig = require('./common.config.js');
 
 module.exports = webpackMerge.smart(commonConfig, {
   devtool: 'source-map',
@@ -19,7 +19,7 @@ module.exports = webpackMerge.smart(commonConfig, {
     loaders: [
       {
         test: /\.css$/,
-        loader: ExtractTextPlugin.extract(
+        loader: ExtractTextWebpackPlugin.extract(
           'style-loader',
           ['css-loader?sourceMap', 'postcss-loader']
         )
@@ -27,21 +27,19 @@ module.exports = webpackMerge.smart(commonConfig, {
     ]
   },
   plugins: [
-    new CleanWebpackPlugin([commonConfig.output.path], {
-      root: path.resolve(__dirname, '../')
-    }),
+    new CleanWebpackPlugin([commonConfig.output.path]),
     new webpack.DefinePlugin({
       'process.env': {
         'NODE_ENV': JSON.stringify('production')
       }
     }),
-    new WebpackMd5Hash(),
+    new Md5HashWebpackPlugin(),
     new webpack.optimize.OccurenceOrderPlugin(true),
     new webpack.optimize.DedupePlugin(),
     new webpack.optimize.CommonsChunkPlugin({
       names: ['vendor']
     }),
-    new ExtractTextPlugin('[name].[contenthash].bundle.css'),
+    new ExtractTextWebpackPlugin('[name].[contenthash].bundle.css'),
     new webpack.optimize.UglifyJsPlugin({
       mangle: {
         screw_ie8 : true

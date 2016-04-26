@@ -1,19 +1,13 @@
-const path = require('path');
-const postcssImport  = require('postcss-import');
-const postcssCssnext = require('postcss-cssnext');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-
-const PATHS = {
-  src: path.join(__dirname, '../src'),
-  build: path.join(__dirname, '../build')
-};
+var postcssImport = require('postcss-import');
+var postcssCssnext = require('postcss-cssnext');
+var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   entry: {
-    app: path.join(PATHS.src, 'app')
+    app: './src/app/index.js'
   },
   output: {
-    path: PATHS.build
+    path: './build'
   },
   resolve: {
     extensions: ['', '.js'],
@@ -57,7 +51,7 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: path.join(PATHS.src, 'index.html')
+      template: './src/index.html'
     })
   ]
 };
