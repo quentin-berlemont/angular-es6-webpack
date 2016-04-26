@@ -18,7 +18,7 @@ module.exports = function(config) {
         { type: 'html', subdir: 'html' }
       ]
     },
-    webpack: webpackTestConfig,
+    webpack: webpackConfig,
     webpackMiddleware: {
       stats: 'errors-only'
     },
